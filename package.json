@@ -1,17 +1,22 @@
 {
   "name": "coc-redocly",
-  "version": "0.0.0-development",
-  "description": "Adpter to VsCode Redocly extensions.",
+  "version": "0.1.0",
+  "description": " Adpter to use Redocly VSCode extension with coc.nvim",
   "author": "Henry Barreto <me@henrybarreto.dev>",
   "license": "MIT",
   "main": "lib/index.js",
   "keywords": [
-    "coc.nvim"
+		"vim",
+		"nvim",
+		"vscode",
+		"coc",
+		"redocly"
   ],
   "engines": {
     "coc": "^0.0.80"
   },
   "scripts": {
+    "extension":"code --install-extension Redocly.openapi-vs-code@0.2.10",
     "lint": "eslint src --ext ts",
     "clean": "rimraf lib",
     "watch": "node esbuild.js --watch",

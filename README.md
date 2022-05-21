@@ -1,22 +1,12 @@
 # coc-redocly
 
-Adpter to VsCode Redocly extensions.
+Adpter to use Redocly VSCode extension with coc.nvim.
 
-## Install
+To use `coc-redocly`, is mandatory to have installed **VSCode**. Subsequently, you may use the `Plug` to install the extension.
 
-`:CocInstall coc-redocly`
-
-## Keymaps
-
-`nmap <silent> <C-l> <Plug>(coc-coc-redocly-keymap)`
-
-## Lists
-
-`:CocList demo_list`
-
-## License
-
-MIT
+```vim
+Plug 'henrybarreto/coc-redocly', {'do': 'npm run extension'}
+```
 
 ---
 

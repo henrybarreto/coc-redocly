@@ -6,17 +6,17 @@
   "license": "MIT",
   "main": "lib/index.js",
   "keywords": [
-		"vim",
-		"nvim",
-		"vscode",
-		"coc",
-		"redocly"
+    "vim",
+    "nvim",
+    "vscode",
+    "coc",
+    "redocly"
   ],
   "engines": {
     "coc": "^0.0.80"
   },
   "scripts": {
-    "extension":"code --install-extension Redocly.openapi-vs-code@0.2.10",
+    "extension": "code --install-extension Redocly.openapi-vs-code@0.2.10",
     "lint": "eslint src --ext ts",
     "clean": "rimraf lib",
     "watch": "node esbuild.js --watch",
@@ -29,6 +29,8 @@
     "semi": true
   },
   "devDependencies": {
+    "@types/decompress": "^4.2.4",
+    "@types/download": "^8.0.1",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
     "coc.nvim": "^0.0.80",
@@ -44,86 +46,91 @@
     "*"
   ],
   "contributes": {
-		"commands": [
-			{
-				"command": "RedoclyOpenAPI.openPreview",
-				"title": "Open preview",
-				"category": "Redocly OpenAPI",
-				"enablement": "editorLangId == yaml || editorLangId == json",
-				"icon": {
-					"light": "./out/webview/icons/redocly-light.svg",
-					"dark": "./out/webview/icons/redocly-dark.svg"
-				}
-			},
-			{
-				"command": "RedoclyOpenAPI.openContext",
-				"title": "Open cursor context",
-				"category": "Redocly OpenAPI",
-				"enablement": "editorLangId == yaml",
-				"icon": {
-					"light": "./out/webview/icons/openapi-light.svg",
-					"dark": "./out/webview/icons/openapi-dark.svg"
-				}
-			}
-		],
-		"menus": {
-			"editor/title": [
-				{
-					"when": "editorLangId == yaml  || editorLangId == json",
-					"command": "RedoclyOpenAPI.openPreview",
-					"group": "navigation"
-				},
-				{
-					"when": "editorLangId == yaml",
-					"command": "RedoclyOpenAPI.openContext",
-					"group": "navigation"
-				}
-			]
-		},
-		"configuration": {
-			"type": "object",
-			"title": "Redocly OpenAPI",
-			"properties": {
-				"redoclyOpenAPI.trace.server": {
-					"scope": "window",
-					"type": "string",
-					"enum": [
-						"off",
-						"messages",
-						"verbose"
-					],
-					"default": "off",
-					"description": "Traces the communication between VS Code and the language server."
-				},
-				"redoclyOpenAPI.api.key": {
-					"scope": "window",
-					"type": "string",
-					"description": "Api key for preview."
-				},
-				"redoclyOpenAPI.api.region": {
-					"scope": "window",
-					"type": "string",
-					"enum": [
-						"us",
-						"eu"
-					],
-					"default": "us",
-					"description": "Region availability of api key for preview."
-				}
-			}
-		},
-		"configurationDefaults": {
-			"[yaml]": {
-				"editor.insertSpaces": true,
-				"editor.tabSize": 2,
-				"editor.quickSuggestions": {
-					"other": true,
-					"comments": false,
-					"strings": true
-				},
-				"editor.autoIndent": "full",
-				"editor.wordBasedSuggestions": false
-			}
-		}
-	}
+    "commands": [
+      {
+        "command": "RedoclyOpenAPI.openPreview",
+        "title": "Open preview",
+        "category": "Redocly OpenAPI",
+        "enablement": "editorLangId == yaml || editorLangId == json",
+        "icon": {
+          "light": "./out/webview/icons/redocly-light.svg",
+          "dark": "./out/webview/icons/redocly-dark.svg"
+        }
+      },
+      {
+        "command": "RedoclyOpenAPI.openContext",
+        "title": "Open cursor context",
+        "category": "Redocly OpenAPI",
+        "enablement": "editorLangId == yaml",
+        "icon": {
+          "light": "./out/webview/icons/openapi-light.svg",
+          "dark": "./out/webview/icons/openapi-dark.svg"
+        }
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "editorLangId == yaml  || editorLangId == json",
+          "command": "RedoclyOpenAPI.openPreview",
+          "group": "navigation"
+        },
+        {
+          "when": "editorLangId == yaml",
+          "command": "RedoclyOpenAPI.openContext",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Redocly OpenAPI",
+      "properties": {
+        "redoclyOpenAPI.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server."
+        },
+        "redoclyOpenAPI.api.key": {
+          "scope": "window",
+          "type": "string",
+          "description": "Api key for preview."
+        },
+        "redoclyOpenAPI.api.region": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "us",
+            "eu"
+          ],
+          "default": "us",
+          "description": "Region availability of api key for preview."
+        }
+      }
+    },
+    "configurationDefaults": {
+      "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.quickSuggestions": {
+          "other": true,
+          "comments": false,
+          "strings": true
+        },
+        "editor.autoIndent": "full",
+        "editor.wordBasedSuggestions": false
+      }
+    }
+  },
+  "dependencies": {
+    "decompress": "^4.2.1",
+    "download": "^8.0.0",
+    "electron": "^19.0.8"
+  }
 }

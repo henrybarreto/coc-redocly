@@ -13,7 +13,8 @@
     "redocly"
   ],
   "engines": {
-    "coc": "^0.0.80"
+    "coc": "^0.0.80",
+    "node" : ">=16.16.0"
   },
   "scripts": {
     "lint": "eslint src --ext ts",

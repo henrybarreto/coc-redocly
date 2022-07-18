@@ -1,6 +1,6 @@
 import decompress from 'decompress'
 import download from 'download'
-import {services, ExtensionContext, LanguageClient, workspace, window} from 'coc.nvim'
+import {services, ExtensionContext, LanguageClient, workspace, window, LanguageClientOptions} from 'coc.nvim'
 import {existsSync} from 'fs'
 import {homedir} from 'os'
 
@@ -90,9 +90,10 @@ export async function activate(context: ExtensionContext): Promise<void> {
   const serverOptions = {
     module: redocly.getServer(),
     arguments: ['--node-ipc'],
+    rootPatterns: [".redocly.yaml"],
   }
 
-  const clientOptions = {
+  const clientOptions: LanguageClientOptions = {
     documentSelector: redocly.getSupportedFiles() 
   }
 

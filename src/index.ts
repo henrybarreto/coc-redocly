@@ -66,7 +66,7 @@ const PATH = '/redocly/'
 /**
  * Version constant is the version what we download and decompress to the Redocly extension. 
  */
-const VERSION = '0.2.10'
+const VERSION = '0.2.11'
 
 export async function activate(context: ExtensionContext): Promise<void> {
   const redocly = new Redocly(context.storagePath+PATH, VERSION)

@@ -1,6 +1,6 @@
 import decompress from 'decompress'
 import download from 'download'
-import {services, ExtensionContext, LanguageClient, workspace, window, LanguageClientOptions} from 'coc.nvim'
+import {services, ExtensionContext, LanguageClient, workspace, window, LanguageClientOptions, ServerOptions} from 'coc.nvim'
 import {existsSync} from 'fs'
 import {homedir} from 'os'
 
@@ -69,6 +69,13 @@ const PATH = '/redocly/'
 const VERSION = '0.2.11'
 
 export async function activate(context: ExtensionContext): Promise<void> {
+  const config = workspace.getConfiguration('coc-redocly')
+  const isEnable = config.get<boolean>('enable', true)
+  if (!isEnable) {
+
+    return
+  }
+
   const redocly = new Redocly(context.storagePath+PATH, VERSION)
   if (!redocly.isDownloaded()) {
 	  redocly.download()
@@ -80,25 +87,18 @@ export async function activate(context: ExtensionContext): Promise<void> {
 	  // TODO: add error output when it could not install the extension.
   }
 
-  const config = workspace.getConfiguration('coc-redocly')
-  const isEnable = config.get<boolean>('enable', true)
-  if (!isEnable) {
-
-    return
-  }
-
-  const serverOptions = {
+  const serverOptions: ServerOptions = {
     module: redocly.getServer(),
-    arguments: ['--node-ipc'],
-    rootPatterns: [".redocly.yaml"],
+    args: ['--node-ipc']
   }
 
   const clientOptions: LanguageClientOptions = {
-    documentSelector: redocly.getSupportedFiles() 
+    documentSelector: redocly.getSupportedFiles(),
   }
 
-  const client = new LanguageClient('coc-redocly', 'coc-redocly', serverOptions, clientOptions);
+  const client = new LanguageClient('coc-redocly', serverOptions, clientOptions);
   client.onReady().then(() => {
+	  // TODO: only show redocly version on satus bar when the file is supported.
 	  if (client.started) {
 		  const item = window.createStatusBarItem(99, {progress: false})
 		  item.text = 'Redocly ' + VERSION 

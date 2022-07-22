@@ -12,6 +12,7 @@ Redocly OpenAPI is a Visual Studio Code extension that helps you write, validate
 Plug 'henrybarreto/coc-redocly'
 ```
 
+> *Notice: the information below was copied from the Redocly OpenAPI and a bit modified by my. Check the official documentation [here](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code).*
 ## Before you start
 
 - The extension requires a `.redocly.yaml` configuration file in your workspace. Read how to create it in the Configuration section.
@@ -73,9 +74,7 @@ To learn more about built-in rules you can use, refer to the Redocly OpenAPI CLI
 
 Note that you can add multiple paths to OpenAPI files under apiDefinitions, each in its own line with a custom, unique name as the key. Files listed in this section will be automatically validated by the extension when you open them in VS Code. Changes made to apiDefinitions are dynamically reflected in the preview panel.
 
-## and more
-
-There are some more features described on the Redocly OpenAPI Official documentation what I didn't test. [Check it out](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code).
+**...**
 
 ---
 > This extension is built with [create-coc-extension](https://github.com/fannheyward/create-coc-extension)

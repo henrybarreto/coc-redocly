@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+.vim/
+
+node_modules/
+lib/
+redocly/

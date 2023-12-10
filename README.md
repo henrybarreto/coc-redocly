@@ -35,8 +35,6 @@ Available options:
 
 Redocly OpenAPI is a Visual Studio Code extension that helps you write, validate, and maintain your OpenAPI documents. It warns about errors in OpenAPI definitions and lets you quickly access referenced schemas or open the files that contain them. The extension works with OpenAPI 2.0 and 3.0 definitions, and has basic support for OpenAPI 3.1.
 
-Check the official documentation [here](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code).
-
 ### Configuration
 
 The extension will identify and load the `redocly.yaml` on the workspace out of the box due the usage of the official language server from redocly under the hood. Check the official documentation for more information about it [here](https://marketplace.visualstudio.com/items?itemName=Redocly.openapi-vs-code).

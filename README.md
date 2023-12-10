@@ -27,7 +27,7 @@ Available options:
 - `redoclyOpenAPI.version`: Redocly OpenAPI version, default: `0.3.4`
 - `redoclyOpenAPI.trace.server`: Trace level of the server, default: `off`
 - `redoclyOpenAPI.api.key`: Redocly API key, default: `null`
-- `redoclyOpenAPI.api.region`: Redocly API region, default: `null`
+- `redoclyOpenAPI.api.region`: Redocly API region, default: `us`
 
 ## Redocly OpenAPI
 

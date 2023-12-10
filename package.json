@@ -130,5 +130,16 @@
         "editor.wordBasedSuggestions": false
       }
     }
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henrybarreto/coc-redocly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/henrybarreto/coc-redocly/issues"
+  },
+  "homepage": "https://github.com/henrybarreto/coc-redocly#readme"
 }

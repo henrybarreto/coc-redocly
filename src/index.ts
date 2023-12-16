@@ -1,16 +1,14 @@
-import fs from "fs";
-import decompress from "decompress";
 import {
-  services,
   ExtensionContext,
   LanguageClient,
-  workspace,
-  window,
   LanguageClientOptions,
   ServerOptions,
+  services,
+  window,
+  workspace,
 } from "coc.nvim";
 
-import { get, install } from "./manager";
+import { Manager } from "./manager";
 
 export async function activate(context: ExtensionContext): Promise<void> {
   const config = workspace.getConfiguration("redoclyOpenAPI");
@@ -29,7 +27,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
   }
 
   const version = config.get<string>("version");
-  if (version == "" || !version) {
+  if (version === "" || !version) {
     window.showErrorMessage("coc-redocly version is empty");
 
     return;
@@ -37,34 +35,22 @@ export async function activate(context: ExtensionContext): Promise<void> {
 
   // TODO: parse the version string and check if it is a valid version.
 
-  const storage = context.storagePath;
-
-  const dir = "/redocly.openapi-vs-code-" + version;
-
-  // check if the extension is already installed.
-  if (!fs.existsSync(storage + dir)) {
+  const manager = new Manager(context.storagePath, version);
+  if (!manager.isInstalled()) {
     try {
-      window.showMessage("coc-redocly downloading version " + version);
-      const blob = await get(version);
+      window.showMessage("coc-redocly installing version: " + version);
+      await manager.install();
 
-      window.showMessage("coc-redocly installing in " + storage + dir);
-      await install(blob, storage + dir);
-
-      window.showMessage("coc-redocly installed to version " + version);
+      window.showMessage("coc-redocly installed");
     } catch (e) {
-      window.showErrorMessage("coc-redocly failed to install due to " + e);
+      window.showErrorMessage(`coc-redocly failed to install due to ${e}`);
 
       return;
     }
   }
 
-  const out = "/extension/out/server/src/server.js";
-
-  // path is the directory where the extension is installed concatened with the directory of the extension after decompression.
-  const path = storage + dir + out;
-
   const serverOptions: ServerOptions = {
-    module: path,
+    module: manager.getServer(),
   };
 
   const clientOptions: LanguageClientOptions = {
@@ -81,8 +67,6 @@ export async function activate(context: ExtensionContext): Promise<void> {
   if (!client.started) {
     client.start();
   }
-
-  window.showMessage("coc-redocly started");
 
   context.subscriptions.push(services.registLanguageClient(client));
 }

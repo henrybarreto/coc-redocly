@@ -37,7 +37,7 @@
     "axios": "^1.6.2",
     "decompress": "^4.2.1",
     "download": "^8.0.0",
-    "electron": "^19.0.8"
+    "electron": "^22.3.25"
   },
   "engines": {
     "coc": "^0.0.80",
